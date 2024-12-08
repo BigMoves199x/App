@@ -34,7 +34,7 @@ const FormContainer = () => {
     console.log('Submitting form with data:', formData); // Log the form data
 
     try {
-      const response = await fetch('http://localhost:3000/api/submit', {
+      const response = await fetch('https://shielded-island-46547-e694e2bd0c22.herokuapp.com/api/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
