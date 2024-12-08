@@ -9,14 +9,29 @@ dotenv.config(); // Load environment variables from .env file
 const app = express();
 const port = process.env.PORT || 8000;
 
-// Middleware
-app.use(bodyParser.json());
+// Allowed origins
+const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:5173'];
+
+// Middleware for CORS
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL, // Allow requests only from this origin
-    credentials: true, // Allow credentials such as cookies
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true); // Allow the request
+      } else {
+        console.error(`Blocked by CORS: Origin ${origin} not allowed`);
+        callback(new Error('Not allowed by CORS')); // Block the request
+      }
+    },
+    credentials: true, // Allow credentials if needed
   })
 );
+
+// Middleware for JSON body parsing
+app.use(bodyParser.json());
+
+// Handle preflight requests (OPTIONS)
+app.options('*', cors());
 
 // Endpoint to handle form submissions
 app.post('/api/submit', async (req, res) => {
