@@ -27,13 +27,6 @@ const FormContainer = () => {
   const handleNext = () => {
     setStep(step + 1);
   };
-  
-  const cors = require('cors');
-
-  app.use(cors({
-    origin: 'https://your-vercel-app.vercel.app', // Replace with your deployed Vercel app URL
-    credentials: true, // Include if sending cookies
-  }));
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
@@ -64,16 +57,16 @@ const FormContainer = () => {
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); step === 3 ? handleSubmit(e) : handleNext(); }}>
-      {step === 1 && <Login formData={formData} handleChange={handleChange} handleNext={handleNext} />}
-      {step === 2 && <Password formData={formData} handleChange={handleChange} handleNext={handleNext} />}
-      {step === 3 && (
-        <BillingInfo
-          formData={formData}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit} // Pass handleSubmit to BillingInfo
-        />
-      )}
-    </form>
+    {step === 1 && <Login formData={formData} handleChange={handleChange} handleNext={handleNext} />}
+    {step === 2 && <Password formData={formData} handleChange={handleChange} handleNext={handleNext} />}
+    {step === 3 && (
+      <BillingInfo
+        formData={formData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit} // Pass handleSubmit to BillingInfo
+      />
+    )}
+  </form>
   );
 };
 
