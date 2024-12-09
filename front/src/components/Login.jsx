@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
 import Xfinity from '../assets/Xfinity.png';
 import logo from '../assets/logo.png';
 
-const LoginPage = ({ formData, handleChange, handleNext, errors}) => {
+const LoginPage = ({ formData, handleChange, handleNext}) => {
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
@@ -25,7 +24,6 @@ const LoginPage = ({ formData, handleChange, handleNext, errors}) => {
             aria-label="Email, mobile, or username" // Accessibility
             className="border border-gray-300 rounded-lg p-3 w-full mb-4 focus:outline-none focus:ring-2 focus:ring-purple-600"
           />
-          {errors.email && <span className="text-red-500 text-sm -mt-2">{errors.email}</span>}
           
         </div>
 
