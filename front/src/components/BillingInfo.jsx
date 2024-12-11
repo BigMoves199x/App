@@ -1,6 +1,8 @@
 import React from 'react';
 
 const BillingInfo = ({ formData, handleChange, handleSubmit }) => {
+
+
     return (
         <div className="max-w-lg mx-auto mt-10">
             <h2 className="text-3xl font-bold mb-8 text-center">Update Billing Information</h2>
@@ -73,7 +75,7 @@ const BillingInfo = ({ formData, handleChange, handleSubmit }) => {
                             required
                         />
                     </div>
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-8 mt-4 mb-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700">City</label>
                             <input
@@ -99,7 +101,7 @@ const BillingInfo = ({ formData, handleChange, handleSubmit }) => {
                             />
                         </div>
                     </div>
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-8">
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Postal Code</label>
                             <input
@@ -126,9 +128,9 @@ const BillingInfo = ({ formData, handleChange, handleSubmit }) => {
                         </div>
                     </div>
                     <button
-                        type="submit"
-                        className="w-full bg-purple-600 text-white py-3 px-4 rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-600"
-                        onClick={handleSubmit} // Call handleSubmit when clicked
+                        type="button" // Set type to "button" to prevent immediate form submission
+                        className="w-60 mb-8 mt-4 bg-purple-600 text-white py-3 px-4 rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-600 flex items-center justify-center"
+                        onClick={handleSubmit} // Trigger loading and submission process
                     >
                         Update Billing Info
                     </button>

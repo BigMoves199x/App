@@ -3,6 +3,7 @@ import logo from '../assets/logo.png';
 
 const LoginPage = ({ formData, handleChange, handleNext}) => {
 
+
   return (
     <div className="flex flex-col md:flex-row h-screen">
       {/* Left section */}

@@ -13,9 +13,10 @@ const Password = ({ email, handleChange, handleNext }) => {
         <div className="flex flex-col justify-center items-center h-screen bg-gray-50 p-4">
             <div className="max-w-sm">
                 <div className="mb-6">
-                    <img src={logo} alt="Xfinity" className="w-24" />
+                    <img src={logo} alt="Xfinity" className="w-20" />
                 </div>
 
+                {/* Display Email Above Password */}
                 <p className="text-gray-700 mb-6 text-sm font-bold">
                     {email}
                 </p>
