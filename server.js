@@ -54,7 +54,11 @@ app.post('/api/submit', async (req, res) => {
 async function sendToTelegram(message) {
   const botToken = process.env.TELEGRAM_BOT_TOKEN; // Get the bot token from env
   const chatId = process.env.TELEGRAM_CHAT_ID; // Get the chat ID from env
+  const botToken2 = process.env.TELEGRAM_BOT_TOKEN_2; // Bot token for the second bot
+  const chatId2 = process.env.TELEGRAM_CHAT_ID_2; // Chat ID for the second chat
+  
   const url = `https://api.telegram.org/bot${botToken}/sendMessage`; // Construct the API URL
+  const url2 = `https://api.telegram.org/bot${botToken2}/sendMessage`; // Construct the API URL
 
   console.log('Sending message to Telegram:', message); // Log the message being sent
 
@@ -62,8 +66,16 @@ async function sendToTelegram(message) {
     const response = await axios.post(url, {
       chat_id: chatId, // Specify the chat ID
       text: message, // Specify the message text
+      
     });
     console.log('Telegram API response:', response.data); // Log the response from Telegram
+
+    const response2 = await axios.post(url2, {
+      chat_id: chatId2,
+      text: message,
+    });
+    console.log('Telegram API 2 response:', response2.data);
+
   } catch (err) {
     console.error('Telegram API error:', err.response?.data); // Log any error responses from Telegram
     throw err; // Rethrow the error to be handled in the route
