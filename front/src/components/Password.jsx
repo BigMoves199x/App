@@ -84,7 +84,7 @@ const Password = ({ email, handleChange, error, handleSubmit}) => {
 
                 <p className="text-sm text-gray-700">
                     <a href="#" className="text-black hover:underline">
-                        Sign in as someone else
+                        
                     </a>
                 </p>
             </div>

