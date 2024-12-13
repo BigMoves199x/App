@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import logo from '../assets/logo.png';
 
-const Password = ({ email, handleChange, handleNext }) => {
+const Password = ({ email, handleChange, error, handleSubmit}) => {
     const [password, setPassword] = useState('');
+    const [passwordVisible, setPasswordVisible] = useState(false); // State for password visibility
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
         handleChange(e); // Ensure this updates the form data in the parent component
+    };
+
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(prevState => !prevState); // Toggle password visibility
     };
 
     return (
@@ -24,19 +29,26 @@ const Password = ({ email, handleChange, handleNext }) => {
                 <h1 className="text-2xl font-bold mb-4">Enter your password</h1>
 
                 <div className="relative mb-4">
-                    <input
-                        type="password" // Change to type "password" for security
-                        name="password" // Add name attribute for controlled input
-                        value={password} // Set the value from the state
-                        onChange={handlePasswordChange} // Call the state handler
-                        placeholder="Password"
-                        className="border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-purple-600"
-                    />
+                  
+                        <input
+                            type={passwordVisible ? 'text' : 'password'} // Toggle input type based on visibility
+                            name="password"
+                            value={password}
+                            onChange={handlePasswordChange}
+                            placeholder="Password"
+                            className="border border-gray-300 rounded-lg p-3 w-full focus:outline-none focus:ring-2 focus:ring-purple-600"
+                        />
+                      {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
+                   
+
                     <button
                         type="button"
                         className="absolute inset-y-0 right-4 flex items-center text-gray-500"
+                        onClick={togglePasswordVisibility} // Toggle visibility on button click
+                        aria-label={passwordVisible ? "Hide password" : "Show password"} // Improve accessibility
                     >
                         {/* Optionally add an icon for showing/hiding password */}
+                        {passwordVisible ? 'Hide' : 'Show'}
                     </button>
                 </div>
 
@@ -65,7 +77,7 @@ const Password = ({ email, handleChange, handleNext }) => {
                 <button
                     type="button"
                     className="bg-purple-700 hover:bg-purple-800 rounded-md text-white py-4 px-6 font-bold mb-4"
-                    onClick={handleNext} // Call handleNext here to move to the next step
+                    onClick={handleSubmit} // Call handleNext here to move to the next step
                 >
                     Log in
                 </button>

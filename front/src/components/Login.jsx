@@ -1,7 +1,7 @@
 import Xfinity from '../assets/Xfinity.png';
 import logo from '../assets/logo.png';
 
-const LoginPage = ({ formData, handleChange, handleNext}) => {
+const LoginPage = ({ formData, handleChange, error, handleNext}) => {
 
 
   return (
@@ -25,7 +25,7 @@ const LoginPage = ({ formData, handleChange, handleNext}) => {
             aria-label="Email, mobile, or username" // Accessibility
             className="border border-gray-300 rounded-lg p-3 w-full mb-4 focus:outline-none focus:ring-2 focus:ring-purple-600"
           />
-          
+          {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
         </div>
 
         <p className="text-sm sm:text-base text-gray-500 mb-4 mt-4">
