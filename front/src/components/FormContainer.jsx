@@ -31,11 +31,6 @@ const FormContainer = () => {
     return true;
   };
 
-  if (!formData.password) {
-    setError('Please enter your password.');
-    return;
-  }
-
   const handleNext = () => {
     if (validateForm()) {
       setStep((prevStep) => prevStep + 1);
