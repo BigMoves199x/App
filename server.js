@@ -30,8 +30,7 @@ app.use(
 // Middleware for JSON body parsing
 app.use(bodyParser.json());
 
-// Handle preflight requests (OPTIONS)
-app.options('*', cors());
+
 
 // Endpoint to handle form submissions
 app.post('/api/submit', async (req, res) => {
